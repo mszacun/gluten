@@ -1,23 +1,6 @@
-from selenium.webdriver.common.by import By
-
-from gluten.page import Page
-from gluten.locators import Locate
-
-from tests.utils import WebDriverTestCase, get_fixture_url
-
-
-class DiffrentLocatorsPage(Page):
-    located_by_id = Locate('with_id', By.ID)
-    located_by_tag_name = Locate('p', By.TAG_NAME)
-    located_by_name = Locate('with_name', By.NAME)
-    located_by_link_text = Locate('link text', By.LINK_TEXT)
-    located_by_class_name = Locate('with_class_name', By.CLASS_NAME)
-    located_by_css_selector = Locate('.with_class_name.and_second_class_name')
-    located_by_xpath = Locate('//body/ul/*[2]', By.XPATH)
-
-    def open(self):
-        fixture_url = get_fixture_url('test_diffrent_locators.html')
-        self._go_to_url(fixture_url)
+from tests.pages.diffrent_locators_page import DiffrentLocatorsPage
+from tests.pages.books_page import BooksPage, BookWebElement
+from tests.utils import WebDriverTestCase
 
 
 class TestLocate(WebDriverTestCase):
@@ -38,3 +21,10 @@ class TestLocate(WebDriverTestCase):
 
     def test_should_return_first_element_when_multiple_elemnts_matches_selector(self):
         self.assertEqual(self.page.located_by_id.text, 'To be located with id')
+
+    def test_should_change_web_element_class_to_class_specified_in_constructor(self):
+        self.page = BooksPage(driver=self.driver)
+        self.page.open()
+
+        element = self.page.first_book
+        self.assertTrue(isinstance(element, BookWebElement))
