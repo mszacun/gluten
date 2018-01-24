@@ -1,4 +1,4 @@
-from selenium.webdriver.remote.webelement import WebElement
+from gluten.webelement import WebElement
 
 from gluten.page import Page
 from gluten.locators import Locate
@@ -6,8 +6,15 @@ from gluten.locators import Locate
 from tests.utils import get_fixture_url
 
 
+class BookFieldWebElement(WebElement):
+    field_name = Locate('.field-name')
+    field_value = Locate('.field-value')
+
+
 class BookWebElement(WebElement):
-    pass
+    title = Locate('.title', webelement_class=BookFieldWebElement)
+    author = Locate('.author', webelement_class=BookFieldWebElement)
+    isbn = Locate('.isbn', webelement_class=BookFieldWebElement)
 
 
 class BooksPage(Page):
