@@ -14,6 +14,9 @@ class WebElementInteractionPage(Page):
     counter = Locate('counter', By.ID)
     increment_button = Locate('increment', By.ID)
 
+    remove_div_button = Locate('remove-div-button', By.ID)
+    removed_div = Locate('removed-div', By.ID)
+
     def open(self):
         fixture_url = get_fixture_url('test_web_elements_interaction_fixture.html')
         self._go_to_url(fixture_url)

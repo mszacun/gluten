@@ -32,4 +32,10 @@ class TestLocate(WebDriverTestCase):
         self.page.increment_button.click()
         self.assertEqual(self.page.counter.text, '3')
 
+    def test_should_allow_to_check_web_element_existance(self):
+        self.page = WebElementInteractionPage(driver=self.driver)
+        self.page.open()
 
+        self.assertTrue(self.page.removed_div.exists())
+        self.page.remove_div_button.click()
+        self.assertFalse(self.page.removed_div.exists())

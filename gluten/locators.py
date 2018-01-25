@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 
 from gluten.webelement import WebElement
+from gluten.element_wrappers import FoundElementWrapper
 
 
 class Locate(object):
@@ -10,7 +11,4 @@ class Locate(object):
         self.webelement_class = webelement_class
 
     def __get__(self, obj, type):
-        found_element = obj._find_element(self.by, self.selector)
-        found_element.__class__ = self.webelement_class
-
-        return found_element
+        return FoundElementWrapper(obj, self.selector, self.by, self.webelement_class)

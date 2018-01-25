@@ -12,18 +12,28 @@
         <p id='counter'>0</p>
         <button id='increment'>Increment</button>
 
-    <script>
-        let copyButton = document.querySelector('#copy-text');
-        copyButton.addEventListener('click', event => {
-            document.querySelector('#copied-text').textContent = document.querySelector('#text-input').value;
-        });
+        <button id='remove-div-button'>Remove div</button>
+        <div id='removed-div'>Removed div</div>
 
-        let incrementButton = document.querySelector('#increment');
-        incrementButton.addEventListener('click', event => {
-            let counter = document.querySelector('#counter');
-            counter.textContent = parseInt(counter.textContent) + 1;
-        });
-    </script>
+        <script>
+
+            let copyButton = document.querySelector('#copy-text');
+            copyButton.addEventListener('click', event => {
+                document.querySelector('#copied-text').textContent = document.querySelector('#text-input').value;
+            });
+
+            let incrementButton = document.querySelector('#increment');
+            incrementButton.addEventListener('click', event => {
+                let counter = document.querySelector('#counter');
+                counter.textContent = parseInt(counter.textContent) + 1;
+            });
+
+            let removeButton = document.querySelector('#remove-div-button');
+            removeButton.addEventListener('click', event => {
+                document.querySelector('#removed-div').remove();
+            });
+
+        </script>
 
     </body>
 </html>
