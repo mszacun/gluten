@@ -1,0 +1,29 @@
+ <!DOCTYPE html>
+<html>
+    <head>
+        <title>Page Title</title>
+    </head>
+    <body>
+
+        <p id='copied-text'>Here will be copied text</p>
+        <input id="text-input"></input>
+        <button id="copy-text">Copy text</button>
+
+        <p id='counter'>0</p>
+        <button id='increment'>Increment</button>
+
+    <script>
+        let copyButton = document.querySelector('#copy-text');
+        copyButton.addEventListener('click', event => {
+            document.querySelector('#copied-text').textContent = document.querySelector('#text-input').value;
+        });
+
+        let incrementButton = document.querySelector('#increment');
+        incrementButton.addEventListener('click', event => {
+            let counter = document.querySelector('#counter');
+            counter.textContent = parseInt(counter.textContent) + 1;
+        });
+    </script>
+
+    </body>
+</html>
