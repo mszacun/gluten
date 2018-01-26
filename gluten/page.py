@@ -7,3 +7,6 @@ class Page(object):
 
     def _find_element(self, by, selector):
         return self.driver.find_element(by, selector)
+
+    def _find_elements(self, by, selector):
+        return self.driver.find_elements(by, selector)
