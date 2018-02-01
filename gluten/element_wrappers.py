@@ -25,7 +25,7 @@ class FoundElementWrapper(object):
         return getattr(self._element, attr_name)
 
 
-class ManyFoundElementsListWraper():
+class ManyFoundElementsListWrapper(object):
     def __init__(self, context, selector, by, webelement_class):
         self.context = context
         self.selector = selector
@@ -47,3 +47,23 @@ class ManyFoundElementsListWraper():
         for element in found_elements:
             element.__class__ = self.webelement_class
         return found_elements
+
+
+class DictElementWrapper(ManyFoundElementsListWrapper):
+    def __init__(self, context, selector, by, webelement_class, key):
+        super().__init__(context, selector, by, webelement_class)
+        self.key = key
+
+    def items(self):
+        return self._elements.items()
+
+    def keys(self):
+        return self._elements.keys()
+
+    def __contains__(self, key):
+        return key in self._elements
+
+    @property
+    def _elements(self):
+        found_elements = super()._elements
+        return {self.key(element): element for element in found_elements}

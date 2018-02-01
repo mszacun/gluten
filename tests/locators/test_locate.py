@@ -30,3 +30,7 @@ class TestLocate(WebDriverTestCase):
 
         element = self.page.first_book
         self.assertTrue(isinstance(element, FoundElementWrapper))
+
+    def test_should_not_allow_to_modify_elements(self):
+        with self.assertRaises(AttributeError):
+            self.page.located_by_id = None
