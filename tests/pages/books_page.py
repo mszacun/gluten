@@ -15,6 +15,7 @@ class BookWebElement(WebElement):
     isbn = Locate('.isbn', webelement_class=BookFieldWebElement)
     table_of_contents_header = Locate('.table-title')
     chapters = LocateMany('.chapter')
+    avibility = Locate('.avibility')
 
 
 class BooksPage(Page):

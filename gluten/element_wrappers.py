@@ -1,5 +1,7 @@
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 
+from gluten.values_wrappers import ValuesList
+
 
 class FoundElementWrapper(object):
     def __init__(self, context, selector, by, webelement_class):
@@ -47,6 +49,9 @@ class ManyFoundElementsListWrapper(object):
         for element in found_elements:
             element.__class__ = self.webelement_class
         return found_elements
+
+    def values(self, attribute_name):
+        return ValuesList(self._elements).values(attribute_name)
 
 
 class DictElementWrapper(ManyFoundElementsListWrapper):
