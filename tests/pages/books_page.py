@@ -9,12 +9,18 @@ class BookFieldWebElement(WebElement):
     field_value = Locate('.field-value')
 
 
+class ChapterWebElement(WebElement):
+    title = Locate('.title')
+    first_page = Locate('.first-page')
+
+
 class BookWebElement(WebElement):
     title = Locate('.title', webelement_class=BookFieldWebElement)
     author = Locate('.author', webelement_class=BookFieldWebElement)
     isbn = Locate('.isbn', webelement_class=BookFieldWebElement)
     table_of_contents_header = Locate('.table-title')
-    chapters = LocateMany('.chapter')
+    chapters = LocateMany('.chapter', webelement_class=ChapterWebElement)
+    chapters_by_title = LocateMany('.chapter', webelement_class=ChapterWebElement, key=lambda chapter: chapter.title.text)
     avibility = Locate('.avibility')
 
 

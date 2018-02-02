@@ -11,23 +11,31 @@ class TestLocateMany(WebDriverTestCase):
         "The Catcher in the Rye"
     ]
 
+    harry_potter_title = "Harry Potter and the Philosopher's Stone"
+    lord_of_the_ring_title = "The Lord of the Rings: The Fellowship of the Ring"
+    da_vinci_code_title = "The Da Vinci Code"
+    the_catcher_title = "The Catcher in the Rye"
+
+    harry_potter_chapters = ['The boy who lived', 'The vanishing glass', 'The letters from no one']
+    lord_of_the_rings_chapters = ['A Long-expected Party', 'The shadow of the Past', 'Three is Company']
+    da_vinci_code_chapters = ['Chapter 1', 'Chapter 2', 'Chapter 3']
+    the_catcher_chapters = ['Chapter 1', 'Chapter 2', '...']
+
     def setUp(self):
         super(TestLocateMany, self).setUp()
         self.page = BooksPage(driver=self.driver)
         self.page.open()
 
     def test_should_allow_locate_many_elements_from_web_element(self):
-        harry_potter_expected_chapters = ['The boy who lived', 'The vanishing glass', '...']
-
-        self.assertEqual([chapter.text for chapter in self.page.first_book.chapters], harry_potter_expected_chapters)
+        self.assertEqual([chapter.title.text for chapter in self.page.first_book.chapters], self.harry_potter_chapters)
 
     def test_should_allow_locate_many_elements_from_page_object(self):
         actual_books = [book.title.field_value.text for book in self.page.books]
         self.assertEqual(actual_books, self.listed_books)
 
     def test_should_allow_to_use_square_brackets_to_get_element(self):
-        self.assertEqual(self.page.books[1].title.field_value.text, "The Lord of the Rings: The Fellowship of the Ring")
-        self.assertEqual(self.page.books[2].title.field_value.text, "The Da Vinci Code")
+        self.assertEqual(self.page.books[1].title.field_value.text, self.lord_of_the_ring_title)
+        self.assertEqual(self.page.books[2].title.field_value.text, self.da_vinci_code_title)
 
     def test_should_allow_to_get_number_of_found_items_using_len_operator(self):
         self.assertEqual(len(self.page.books), 4)
@@ -40,8 +48,8 @@ class TestLocateMany(WebDriverTestCase):
         self.assertEqual(len(self.page.books_by_titles), 4)
 
     def test_should_allow_to_use_contains_operator_while_using_dict_wrapper(self):
-        self.assertTrue("The Da Vinci Code" in self.page.books_by_titles)
-        self.assertFalse("Commenting out tests" in self.page.books_by_titles)
+        self.assertTrue(self.da_vinci_code_title in self.page.books_by_titles)
+        self.assertFalse('not existing title' in self.page.books_by_titles)
 
     def test_should_allow_to_iterate_with_keys_method_while_using_dict_wrapper(self):
         for key, book in self.page.books_by_titles.items():
@@ -57,8 +65,12 @@ class TestLocateMany(WebDriverTestCase):
             self.page.books_by_titles = {}
 
     def test_should_allow_to_get_found_elements_attribute_for_each_found_element(self):
-        harry_potter_expected_chapters = ['The boy who lived', 'The vanishing glass', '...']
-        self.assertEqual(list(self.page.books[0].chapters.values('text')), harry_potter_expected_chapters)
+        harry_potter_chapters_with_pages = [
+            'The boy who lived 5',
+            'The vanishing glass 32',
+            'The letters from no one 45',
+        ]
+        self.assertEqual(list(self.page.books[0].chapters.values('text')), harry_potter_chapters_with_pages)
 
     def test_should_allow_chaining_when_getting_elements_attributes(self):
         self.assertEqual(list(self.page.books.values('avibility').values('text')),
@@ -67,15 +79,47 @@ class TestLocateMany(WebDriverTestCase):
         actual_books_titles = list(self.page.books.values('title').values('field_value').values('text'))
         self.assertEqual(actual_books_titles, self.listed_books)
 
-    def test_should_allow_using_values_method_to_get_attribute_that_is_list_and_chain_to_get_value_for_each_elem(self):
-        harry_potter_expected_chapters = ['The boy who lived', 'The vanishing glass', '...']
-        lord_of_the_rings_chapters = ['A Long-expected Party', 'The shadow of the Past', '...']
-        da_vinci_code_chapters = ['Chapter 1', 'Chapter 2', '...']
-        the_catcher_in_the_rye_chapters = da_vinci_code_chapters
+    def test_should_allow_using_values_method_to_get_attribute_that_is_list_and_chain_to_get_value_for_each_element(self):
+        all_books_titles = list(self.page.books.values('chapters').values('title').values('text'))
+        self.assertEqual(all_books_titles[0], self.harry_potter_chapters)
+        self.assertEqual(all_books_titles[1], self.lord_of_the_rings_chapters)
+        self.assertEqual(all_books_titles[2], self.da_vinci_code_chapters)
+        self.assertEqual(all_books_titles[3], self.the_catcher_chapters)
 
-        all_books_titles = list(self.page.books.values('chapters').values('text'))
-        self.assertEqual(all_books_titles[0], harry_potter_expected_chapters)
-        self.assertEqual(all_books_titles[1], lord_of_the_rings_chapters)
-        self.assertEqual(all_books_titles[2], da_vinci_code_chapters)
-        self.assertEqual(all_books_titles[3], the_catcher_in_the_rye_chapters)
+    def test_should_allow_chaining_when_getting_key_indexed_elements_attributes(self):
+        expected_books_avibility = {
+            self.harry_potter_title: 'Aviable',
+            self.lord_of_the_ring_title: 'Aviable',
+            self.da_vinci_code_title: 'Not aviable',
+            self.the_catcher_title: 'Aviable',
+        }
+        self.assertEqual(dict(self.page.books_by_titles.values('avibility').values('text').items()),
+                         expected_books_avibility)
+
+        expected_books_authors = {
+            self.harry_potter_title: 'J. K. Rowling',
+            self.lord_of_the_ring_title: 'J. R. R. Tolkien',
+            self.da_vinci_code_title: 'Dan Brown',
+            self.the_catcher_title: 'Jerome David Salinger',
+        }
+
+        actual_authors = dict(self.page.books_by_titles.values('author').values('field_value').values('text').items())
+        self.assertEqual(actual_authors, expected_books_authors)
+
+    def test_should_allow_using_values_method_on_key_indexed_elements_to_get_attribute_that_is_list_and_chain_to_get_value_for_each_element(self):
+        all_books_titles = dict(self.page.books_by_titles.values('chapters').values('title').values('text').items())
+
+        self.assertEqual(all_books_titles[self.harry_potter_title], self.harry_potter_chapters)
+        self.assertEqual(all_books_titles[self.lord_of_the_ring_title], self.lord_of_the_rings_chapters)
+        self.assertEqual(all_books_titles[self.da_vinci_code_title], self.da_vinci_code_chapters)
+        self.assertEqual(all_books_titles[self.the_catcher_title], self.the_catcher_chapters)
+
+    def test_should_allow_using_key_indexed_elements_on_web_element(self):
+        harry_potter_chapters_start = {
+            'The boy who lived': '5',
+            'The vanishing glass': '32',
+            'The letters from no one': '45',
+        }
+        actual_chapters = dict(self.page.first_book.chapters_by_title.values('first_page').values('text').items())
+        self.assertEqual(actual_chapters, harry_potter_chapters_start)
 
