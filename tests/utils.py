@@ -1,16 +1,14 @@
 import os
 
-from unittest import TestCase
+import pytest
 
-from selenium import webdriver
 
 def get_fixture_url(fixture_name):
     return 'file://' + os.path.join(os.path.dirname(__file__), 'fixtures', fixture_name)
 
 
-class WebDriverTestCase(TestCase):
-    def setUp(self):
-        self.driver = webdriver.Firefox()
-
-    def tearDown(self):
-        self.driver.close()
+class WebDriverTestCase(object):
+    @classmethod
+    @pytest.fixture(autouse=True, scope='class')
+    def setup_class(cls, firefox):
+        cls.firefox = firefox
