@@ -1,6 +1,6 @@
 from gluten.locators import Locate, LocateMany
 from gluten.page import Page
-from gluten.webelement import WebElement
+from gluten.webelements.base import WebElement
 from tests.utils import get_fixture_url
 
 

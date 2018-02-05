@@ -10,6 +10,9 @@ class FoundElementWrapper(object):
         self.by = by
         self.webelement_class = webelement_class
 
+    def __getitem__(self, item):
+        return self._element[item]
+
     def exists(self):
         try:
             _ = self._element

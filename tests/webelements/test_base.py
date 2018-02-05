@@ -1,6 +1,4 @@
-import pytest
-
-from tests.pages.books_page import BooksPage, BookWebElement
+from tests.pages.books_page import BooksPage
 from tests.pages.web_element_interaction_page import WebElementInteractionPage
 
 from tests.utils import WebDriverTestCase

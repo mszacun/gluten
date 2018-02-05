@@ -1,6 +1,7 @@
 def get_attribute_from_elements(elements, attribute_name):
     return [get_attribute_from_element(element, attribute_name) for element in elements]
 
+
 def get_attribute_from_element(element, attribute_name):
     if hasattr(element, '__iter__'):
         return get_attribute_from_elements(element, attribute_name)

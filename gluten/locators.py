@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 
-from gluten.webelement import WebElement
+from gluten.webelements.base import WebElement
 from gluten.element_wrappers import FoundElementWrapper, ManyFoundElementsListWrapper, DictElementWrapper
 
 
