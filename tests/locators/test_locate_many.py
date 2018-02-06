@@ -60,7 +60,7 @@ class TestLocateMany(WebDriverTestCase):
             assert key == book.title.field_value.text
 
     def test_should_return_keys_for_keys_method_while_using_dict_wrapper(self):
-        assert sorted(self.listed_books) ==  sorted(self.page.books_by_titles.keys())
+        assert sorted(self.listed_books) == sorted(self.page.books_by_titles.keys())
 
     def test_should_not_allow_to_modify_elements(self):
         with pytest.raises(AttributeError):
@@ -77,13 +77,14 @@ class TestLocateMany(WebDriverTestCase):
         assert list(self.page.books[0].chapters.values('text')) == harry_potter_chapters_with_pages
 
     def test_should_allow_chaining_when_getting_elements_attributes(self):
-        expected_avibility = ['Aviable', 'Aviable', 'Not aviable', 'Aviable']
-        assert list(self.page.books.values('avibility').values('text')) == expected_avibility
+        expected_availability = ['Aviable', 'Aviable', 'Not aviable', 'Aviable']
+        assert list(self.page.books.values('availability').values('text')) == expected_availability
 
         actual_books_titles = list(self.page.books.values('title').values('field_value').values('text'))
         assert actual_books_titles == self.listed_books
 
-    def test_should_allow_using_values_method_to_get_attribute_that_is_list_and_chain_to_get_value_for_each_element(self):
+    def test_should_allow_using_values_method_to_get_attribute_that_is_list_and_chain_to_get_value_for_each_element(
+            self):
         all_books_titles = list(self.page.books.values('chapters').values('title').values('text'))
         assert all_books_titles[0] == self.harry_potter_chapters
         assert all_books_titles[1] == self.lord_of_the_rings_chapters
@@ -91,13 +92,14 @@ class TestLocateMany(WebDriverTestCase):
         assert all_books_titles[3] == self.the_catcher_chapters
 
     def test_should_allow_chaining_when_getting_key_indexed_elements_attributes(self):
-        expected_books_avibility = {
+        expected_books_availability = {
             self.harry_potter_title: 'Aviable',
             self.lord_of_the_ring_title: 'Aviable',
             self.da_vinci_code_title: 'Not aviable',
             self.the_catcher_title: 'Aviable',
         }
-        assert dict(self.page.books_by_titles.values('avibility').values('text').items()) == expected_books_avibility
+        assert dict(
+            self.page.books_by_titles.values('availability').values('text').items()) == expected_books_availability
 
         expected_books_authors = {
             self.harry_potter_title: 'J. K. Rowling',
@@ -125,4 +127,3 @@ class TestLocateMany(WebDriverTestCase):
         }
         actual_chapters = dict(self.page.first_book.chapters_by_title.values('first_page').values('text').items())
         assert actual_chapters == harry_potter_chapters_start
-

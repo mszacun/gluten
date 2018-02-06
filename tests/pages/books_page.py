@@ -1,7 +1,12 @@
-from gluten.locators import Locate, LocateMany
+from gluten.locators import Locate, LocateMany, LocateGlobal, LocateGlobalMany
 from gluten.page import Page
 from gluten.webelements.base import WebElement
 from tests.utils import get_fixture_url
+
+
+class FutureWebElement(WebElement):
+    title = Locate('.title')
+    date = Locate('.date')
 
 
 class BookFieldWebElement(WebElement):
@@ -14,20 +19,30 @@ class ChapterWebElement(WebElement):
     first_page = Locate('.first-page')
 
 
+class BestsellerWebElement(WebElement):
+    prompt = Locate('.prompt')
+    title = Locate('.title')
+    books = LocateGlobalMany('.book')
+    future_by_title = LocateGlobalMany('.release .item', webelement_class=FutureWebElement, key=lambda future: future.title.text)
+
+
 class BookWebElement(WebElement):
     title = Locate('.title', webelement_class=BookFieldWebElement)
     author = Locate('.author', webelement_class=BookFieldWebElement)
     isbn = Locate('.isbn', webelement_class=BookFieldWebElement)
     table_of_contents_header = Locate('.table-title')
     chapters = LocateMany('.chapter', webelement_class=ChapterWebElement)
-    chapters_by_title = LocateMany('.chapter', webelement_class=ChapterWebElement, key=lambda chapter: chapter.title.text)
-    avibility = Locate('.avibility')
+    chapters_by_title = LocateMany('.chapter', webelement_class=ChapterWebElement,
+                                   key=lambda chapter: chapter.title.text)
+    availability = Locate('.availability')
+    bestseller = LocateGlobal('.bestseller', webelement_class=BestsellerWebElement)
 
 
 class BooksPage(Page):
     first_book = Locate('.book', webelement_class=BookWebElement)
     books = LocateMany('.book', webelement_class=BookWebElement)
     books_by_titles = LocateMany('.book', webelement_class=BookWebElement, key=lambda book: book.title.field_value.text)
+    bestseller = Locate('.bestseller', webelement_class=BestsellerWebElement)
 
     def open(self):
         fixture_url = get_fixture_url('test_web_elements_fixture.html')

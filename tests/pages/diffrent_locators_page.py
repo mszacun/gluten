@@ -18,5 +18,3 @@ class DiffrentLocatorsPage(Page):
     def open(self):
         fixture_url = get_fixture_url('test_diffrent_locators.html')
         self._go_to_url(fixture_url)
-
-

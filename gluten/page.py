@@ -1,3 +1,6 @@
+from gluten.search_scope import SearchScope
+
+
 class Page(object):
     def __init__(self, driver):
         self.driver = driver
@@ -5,8 +8,8 @@ class Page(object):
     def _go_to_url(self, url):
         self.driver.get(url)
 
-    def _find_element(self, by, selector):
-        return self.driver.find_element(by, selector)
+    def _get_local_search_scope(self):
+        return SearchScope(self.driver)
 
-    def _find_elements(self, by, selector):
-        return self.driver.find_elements(by, selector)
+    def _get_global_search_scope(self):
+        raise NotImplemented("Global scope is default for page object - please don't use global locators")

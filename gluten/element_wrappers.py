@@ -22,7 +22,7 @@ class FoundElementWrapper(object):
 
     @property
     def _element(self):
-        found_element = self.context._find_element(self.by, self.selector)
+        found_element = self.context.find_element(self.by, self.selector)
         found_element.__class__ = self.webelement_class
         return found_element
 
@@ -48,7 +48,7 @@ class ManyFoundElementsListWrapper(object):
 
     @property
     def _elements(self):
-        found_elements = self.context._find_elements(self.by, self.selector)
+        found_elements = self.context.find_elements(self.by, self.selector)
         for element in found_elements:
             element.__class__ = self.webelement_class
         return found_elements
