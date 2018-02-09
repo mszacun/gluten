@@ -3,28 +3,82 @@
 <head>
     <title>Page Title</title>
     <style>
-        .book, .bestseller, .future {
-            border: 1px solid red;
-            margin: 5px;
-            padding: 5px;
+        * {
+            margin: 0;
+            padding: 0;
         }
 
-        .date {
-            font-size: 10px;
-            font-style: italic;
+        html {
+            font-size: 62.5%;
         }
 
-        .field-name {
-            width: 100px;
+        body {
+            height: 100vh;
+            max-width: 120rem;
+            margin: 0 auto;
+            font-size: 1.6rem;
+            background-image: linear-gradient(to bottom right, #63cdda, #3dc1d3);
         }
 
-        .chapters {
-            margin-top: 0;
+        h1 { font-size: 3.6rem; }
+        h2 { font-size: 3.2rem; }
+        h2 { font-size: 2.8rem; }
+
+        .bestseller {
+            margin-top: 3rem;
+            padding: 2rem;
+            background-image: linear-gradient(to bottom right, #f8a5c2, #f78fb3);
+            border-radius: 3px;
+        }
+
+        .future {
+            margin-top: 3rem;
+            padding: 2rem;
+            border-radius: 3px;
+            color: white;
+            background-image: linear-gradient(to bottom right, #786fa6, #574b90);
+        }
+
+        .future ol {
+            position: relative;
+            left: 3rem;
         }
 
         .contents {
-            margin-top: 16px;
-            margin-left: 16px;
+            margin-left: auto;
+        }
+
+        .book {
+            margin-top: 3rem;
+            padding: 2rem;
+            background-image: linear-gradient(to bottom right, #f5cd79, #e15f41);
+        }
+
+        .description {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .basic-info {
+            width: 50%;
+        }
+
+        .availability {
+            padding: 1rem 2rem;
+            margin-left: auto;
+            text-transform: uppercase;
+            background-color: white;
+            border-radius: 3px;
+            width: 10rem;
+            display: flex;
+            justify-content: center;
+
+        }
+
+        .not-aviable {
+            background-color: #d63031;
+            color: white;
         }
     </style>
 </head>
@@ -52,134 +106,150 @@
 </div>
 <div class="books">
     <div class="book">
-        <div class="title">
-            <span class='field-name'>Title: </span>
-            <span class='field-value'>Harry Potter and the Philosopher's Stone</span>
+        <div class="description">
+            <div class="basic-info">
+                <div class="title">
+                    <span class='field-name'>Title: </span>
+                    <span class='field-value'>Harry Potter and the Philosopher's Stone</span>
+                </div>
+                <div class="author">
+                    <span class="field-name">Author: </span>
+                    <span class="field-value">J. K. Rowling</span>
+                </div>
+                <div class="isbn">
+                    <span class="field-name">ISBN: </span>
+                    <span class="field-value">0747532699</span>
+                </div>
+            </div>
+            <div class="contents">
+                <span class="table-title">Table of contents:</span>
+                <ol>
+                    <li class="chapter">
+                        <span class="title">The boy who lived</span>
+                        <span class="first-page">5</span>
+                    </li>
+                    <li class="chapter">
+                        <span class="title">The vanishing glass</span>
+                        <span class="first-page">32</span>
+                    </li>
+                    <li class="chapter">
+                        <span class="title">The letters from no one</span>
+                        <span class="first-page">45</span>
+                    </li>
+                </ol>
+            </div>
+            <p class="availability">Aviable</p>
         </div>
-        <div class="author">
-            <span class="field-name">Author: </span>
-            <span class="field-value">J. K. Rowling</span>
-        </div>
-        <div class="isbn">
-            <span class="field-name">ISBN: </span>
-            <span class="field-value">0747532699</span>
-        </div>
-        <div class="contents">
-            <span class="table-title">Table of contents:</span>
-            <ol>
-                <li class="chapter">
-                    <span class="title">The boy who lived</span>
-                    <span class="first-page">5</span>
-                </li>
-                <li class="chapter">
-                    <span class="title">The vanishing glass</span>
-                    <span class="first-page">32</span>
-                </li>
-                <li class="chapter">
-                    <span class="title">The letters from no one</span>
-                    <span class="first-page">45</span>
-                </li>
-            </ol>
-        </div>
-        <p class="availability">Aviable</p>
     </div>
     <div class="book">
-        <div class="title">
-            <span class="field-name">Title: </span>
-            <span class="field-value">The Lord of the Rings: The Fellowship of the Ring</span>
+        <div class="description">
+            <div class="basic-info">
+                <div class="title">
+                    <span class="field-name">Title: </span>
+                    <span class="field-value">The Lord of the Rings: The Fellowship of the Ring</span>
+                </div>
+                <div class="author">
+                    <span class="field-name">Author: </span>
+                    <span class="field-value">J. R. R. Tolkien</span>
+                </div>
+                <div class="isbn">
+                    <span class="field-name">ISBN: </span>
+                    <span class="field-value">9789172632936</span>
+                </div>
+            </div>
+            <div class="contents">
+                <span class="table-title">Table of contents:</span>
+                <ol class="chapters">
+                    <li class="chapter">
+                        <span class="title">A Long-expected Party</span>
+                        <span class="first-page">3</span>
+                    </li>
+                    <li class="chapter">
+                        <span class="title">The shadow of the Past</span>
+                        <span class="first-page">17</span>
+                    </li>
+                    <li class="chapter">
+                        <span class="title">Three is Company</span>
+                        <span class="first-page">36</span>
+                    </li>
+                </ol>
+            </div>
+            <p class="availability">Aviable</p>
         </div>
-        <div class="author">
-            <span class="field-name">Author: </span>
-            <span class="field-value">J. R. R. Tolkien</span>
-        </div>
-        <div class="isbn">
-            <span class="field-name">ISBN: </span>
-            <span class="field-value">9789172632936</span>
-        </div>
-        <div class="contents">
-            <span class="table-title">Table of contents:</span>
-            <ol class="chapters">
-                <li class="chapter">
-                    <span class="title">A Long-expected Party</span>
-                    <span class="first-page">3</span>
-                </li>
-                <li class="chapter">
-                    <span class="title">The shadow of the Past</span>
-                    <span class="first-page">17</span>
-                </li>
-                <li class="chapter">
-                    <span class="title">Three is Company</span>
-                    <span class="first-page">36</span>
-                </li>
-            </ol>
-        </div>
-        <p class="availability">Aviable</p>
-    </div>
-
-    <div class="book">
-        <div class="title">
-            <span class="field-name">Title: </span>
-            <span class="field-value">The Da Vinci Code</span>
-        </div>
-        <div class="author">
-            <span class="field-name">Author: </span>
-            <span class="field-value">Dan Brown</span>
-        </div>
-        <div class="isbn">
-            <span class="field-name">ISBN: </span>
-            <span class="field-value">0385504209</span>
-        </div>
-        <div class="contents">
-            <span class="table-title">Table of contents:</span>
-            <ol class="chapters">
-                <li class="chapter">
-                    <span class="title">Chapter 1</span>
-                    <span class="first-page">8</span>
-                </li>
-                <li class="chapter">
-                    <span class="title">Chapter 2</span>
-                    <span class="first-page">29</span>
-                </li>
-                <li class="chapter">
-                    <span class="title">Chapter 3</span>
-                    <span class="first-page">56</span>
-                </li>
-            </ol>
-        </div>
-        <p class="availability">Not aviable</p>
     </div>
 
     <div class="book">
-        <div class="title">
-            <span class="field-name">Title: </span>
-            <span class="field-value">The Catcher in the Rye</span>
+        <div class="description">
+            <div class="basic-info">
+                <div class="title">
+                    <span class="field-name">Title: </span>
+                    <span class="field-value">The Da Vinci Code</span>
+                </div>
+                <div class="author">
+                    <span class="field-name">Author: </span>
+                    <span class="field-value">Dan Brown</span>
+                </div>
+                <div class="isbn">
+                    <span class="field-name">ISBN: </span>
+                    <span class="field-value">0385504209</span>
+                </div>
+            </div>
+            <div class="contents">
+                <span class="table-title">Table of contents:</span>
+                <ol class="chapters">
+                    <li class="chapter">
+                        <span class="title">Chapter 1</span>
+                        <span class="first-page">8</span>
+                    </li>
+                    <li class="chapter">
+                        <span class="title">Chapter 2</span>
+                        <span class="first-page">29</span>
+                    </li>
+                    <li class="chapter">
+                        <span class="title">Chapter 3</span>
+                        <span class="first-page">56</span>
+                    </li>
+                </ol>
+            </div>
+            <p class="availability not-aviable">Not aviable</p>
         </div>
-        <div class="author">
-            <span class="field-name">Author: </span>
-            <span class="field-value">Jerome David Salinger</span>
+    </div>
+
+    <div class="book">
+        <div class="description">
+            <div class="basic-info">
+                <div class="title">
+                    <span class="field-name">Title: </span>
+                    <span class="field-value">The Catcher in the Rye</span>
+                </div>
+                <div class="author">
+                    <span class="field-name">Author: </span>
+                    <span class="field-value">Jerome David Salinger</span>
+                </div>
+                <div class="isbn">
+                    <span class="field-name">ISBN: </span>
+                    <span class="field-value">7543321726</span>
+                </div>
+            </div>
+            <div class="contents">
+                <span class="table-title">Table of contents:</span>
+                <ol class="chapters">
+                    <li class="chapter">
+                        <span class="title">Chapter 1</span>
+                        <span class="first-page">6</span>
+                    </li>
+                    <li class="chapter">
+                        <span class="title">Chapter 2</span>
+                        <span class="first-page">29</span>
+                    </li>
+                    <li class="chapter">
+                        <span class="title">...</span>
+                        <span class="first-page">38</span>
+                    </li>
+                </ol>
+            </div>
+            <p class="availability">Aviable</p>
         </div>
-        <div class="isbn">
-            <span class="field-name">ISBN: </span>
-            <span class="field-value">7543321726</span>
-        </div>
-        <div class="contents">
-            <span class="table-title">Table of contents:</span>
-            <ol class="chapters">
-                <li class="chapter">
-                    <span class="title">Chapter 1</span>
-                    <span class="first-page">6</span>
-                </li>
-                <li class="chapter">
-                    <span class="title">Chapter 2</span>
-                    <span class="first-page">29</span>
-                </li>
-                <li class="chapter">
-                    <span class="title">...</span>
-                    <span class="first-page">38</span>
-                </li>
-            </ol>
-        </div>
-        <p class="availability">Aviable</p>
     </div>
 </div>
 </body>
