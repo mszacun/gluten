@@ -8,6 +8,18 @@ LOCAL_SCOPE_GETTER = lambda obj: obj._get_local_search_scope()
 GLOBAL_SCOPE_GETTER = lambda obj: obj._get_global_search_scope()
 
 
+def dynamic_locate(context, selector, by=By.CSS_SELECTOR, scope_getter=LOCAL_SCOPE_GETTER, webelement_class=WebElement):
+    return FoundElementWrapper(scope_getter(context), selector, by, webelement_class)
+
+
+def dynamic_locate_many(context, selector, by=By.CSS_SELECTOR, scope_getter=LOCAL_SCOPE_GETTER,
+                        webelement_class=WebElement, key=None):
+    search_scope = scope_getter(context)
+    if key:
+        return DictElementWrapper(search_scope, selector, by, webelement_class, key)
+    return ManyFoundElementsListWrapper(search_scope, selector, by, webelement_class)
+
+
 class LocateBase(object):
     search_scope_getter = LOCAL_SCOPE_GETTER
 
@@ -19,13 +31,10 @@ class LocateBase(object):
     def __set__(self, instance, value):
         raise AttributeError
 
-    def _get_search_scope_getter(self, obj):
-        return self.__class__.search_scope_getter(obj)
-
 
 class Locate(LocateBase):
     def __get__(self, obj, type):
-        return FoundElementWrapper(self._get_search_scope_getter(obj), self.selector, self.by, self.webelement_class)
+        return dynamic_locate(obj, self.selector, self.by, self.__class__.search_scope_getter, self.webelement_class)
 
 
 class LocateMany(LocateBase):
@@ -34,10 +43,8 @@ class LocateMany(LocateBase):
         self.key = key
 
     def __get__(self, obj, type):
-        search_scope = self._get_search_scope_getter(obj)
-        if self.key:
-            return DictElementWrapper(search_scope, self.selector, self.by, self.webelement_class, self.key)
-        return ManyFoundElementsListWrapper(search_scope, self.selector, self.by, self.webelement_class)
+        return dynamic_locate_many(obj, self.selector, self.by, self.__class__.search_scope_getter,
+                                   self.webelement_class, self.key)
 
 
 class LocateGlobal(Locate):
