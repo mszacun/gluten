@@ -1,0 +1,44 @@
+ <!DOCTYPE html>
+<html>
+    <head>
+        <title>Page Title</title>
+    </head>
+    <body>
+        <button id='make-not-visible-button'>Make not visible</button>
+        <button id='make-not-displayed-button'>Make not displayed</button>
+        <button id='remove-button'>Remove</button>
+
+        <div id='to-be-not-visible'>This will be invisible</div>
+        <div id='to-be-not-displayed'>This will be not displayed</div>
+        <div id='to-be-removed'>This will be removed</div>
+
+        <script>
+            let notVisibleButton = document.querySelector('#make-not-visible-button');
+            notVisibleButton.addEventListener('click', event => {
+                let element = document.querySelector('#to-be-not-visible');
+                element.style.visibility = element.style.visibility == 'hidden' ? 'visible' : 'hidden';
+            });
+
+            let notDisplayedButton = document.querySelector('#make-not-displayed-button');
+            notDisplayedButton.addEventListener('click', event => {
+                let element = document.querySelector('#to-be-not-displayed');
+                element.style.display = element.style.display == 'none' ? 'block' : 'none';
+            });
+
+            let removeButton = document.querySelector('#remove-button');
+            removeButton.addEventListener('click', event => {
+                let element = document.querySelector('#to-be-removed');
+                if (element !== null)
+                    element.remove()
+                else {
+                    element = document.createElement('p');
+                    element.id = 'to-be-removed';
+                    let elementText = document.createTextNode('This will be removed');
+                    element.appendChild(elementText);
+                    document.querySelector('body').appendChild(element);
+                }
+
+            });
+        </script>
+    </body>
+</html>
