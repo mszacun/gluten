@@ -15,6 +15,9 @@
         <button id='remove-div-button'>Remove div</button>
         <div id='removed-div'>Removed div</div>
 
+        <div id="dynamic-classes-div"> Div with dynamic classes</div>
+        <button id="add-class-button">Add class</div>
+
         <script>
 
             let copyButton = document.querySelector('#copy-text');
@@ -31,6 +34,12 @@
             let removeButton = document.querySelector('#remove-div-button');
             removeButton.addEventListener('click', event => {
                 document.querySelector('#removed-div').remove();
+            });
+
+            let addClassButton = document.querySelector('#add-class-button');
+            addClassButton.addEventListener('click', event => {
+                let dynamicClassesDiv = document.querySelector('#dynamic-classes-div');
+                dynamicClassesDiv.classList.add('class' + (dynamicClassesDiv.classList.length + 1));
             });
 
         </script>

@@ -17,3 +17,11 @@ class WebElement(webelement.WebElement):
     @property
     def is_visible(self):
         return self.value_of_css_property('visibility') != 'hidden'
+
+    @property
+    def classes(self):
+        return self.get_attribute('class').split()
+
+    def has_class(self, class_name):
+        return class_name in self.classes
+

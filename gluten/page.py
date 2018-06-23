@@ -1,9 +1,12 @@
+from selenium.webdriver.remote.webelement import WebElement
+
 from gluten.search_scope import SearchScope
 
 
 class Page(object):
     def __init__(self, driver):
         self.driver = driver
+        self.driver._web_element_cls = WebElement
 
     def _go_to_url(self, url):
         self.driver.get(url)

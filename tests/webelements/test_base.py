@@ -66,3 +66,20 @@ class TestBaseWebelement(WebDriverTestCase):
         page.make_not_displayed_button.click()
 
         assert not page.to_not_be_displayed.is_displayed
+
+    def test_should_return_list_of_elements_classes(self):
+        page = WebElementInteractionPage(driver=self.firefox)
+        page.open()
+
+        assert page.dynamic_classes_div.classes == []
+        assert not page.dynamic_classes_div.has_class('class1')
+
+        page.add_class_button.click()
+        assert page.dynamic_classes_div.classes == ['class1']
+        assert page.dynamic_classes_div.has_class('class1')
+        assert not page.dynamic_classes_div.has_class('class2')
+
+        page.add_class_button.click()
+        assert page.dynamic_classes_div.classes == ['class1', 'class2']
+        assert page.dynamic_classes_div.has_class('class1')
+        assert page.dynamic_classes_div.has_class('class2')

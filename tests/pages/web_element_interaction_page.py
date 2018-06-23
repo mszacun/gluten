@@ -17,6 +17,9 @@ class WebElementInteractionPage(Page):
     remove_div_button = Locate('remove-div-button', By.ID)
     removed_div = Locate('removed-div', By.ID)
 
+    dynamic_classes_div = Locate('dynamic-classes-div', By.ID)
+    add_class_button = Locate('add-class-button', By.ID)
+
     def open(self):
         fixture_url = get_fixture_url('test_web_elements_interaction_fixture.html')
         self._go_to_url(fixture_url)
