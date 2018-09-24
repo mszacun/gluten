@@ -16,7 +16,9 @@
         <div id='removed-div'>Removed div</div>
 
         <div id="dynamic-classes-div"> Div with dynamic classes</div>
-        <button id="add-class-button">Add class</div>
+        <button id="add-class-button">Add class</button>
+
+        <div id="double-click-text-changing-div">This text will change on double click</div>
 
         <script>
 
@@ -40,6 +42,11 @@
             addClassButton.addEventListener('click', event => {
                 let dynamicClassesDiv = document.querySelector('#dynamic-classes-div');
                 dynamicClassesDiv.classList.add('class' + (dynamicClassesDiv.classList.length + 1));
+            });
+
+            let doubleClickTextChangingDiv = document.querySelector('#double-click-text-changing-div');
+            doubleClickTextChangingDiv.addEventListener('dblclick', event => {
+              doubleClickTextChangingDiv.textContent = 'double clicked';
             });
 
         </script>

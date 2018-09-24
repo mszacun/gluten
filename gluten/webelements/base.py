@@ -1,4 +1,5 @@
 from selenium.webdriver.remote import webelement
+from selenium.webdriver.common.action_chains import ActionChains
 
 from gluten.search_scope import SearchScope
 
@@ -24,4 +25,7 @@ class WebElement(webelement.WebElement):
 
     def has_class(self, class_name):
         return class_name in self.classes
+
+    def double_click(self):
+        ActionChains(self.parent).double_click(self).perform()
 
