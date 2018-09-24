@@ -6,4 +6,4 @@ from gluten.page import Page
 
 from gluten.webelements.base import WebElement
 
-from gluten.wait import do_it
+from gluten.wait import do_it, wait_until
