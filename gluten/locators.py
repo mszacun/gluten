@@ -21,7 +21,7 @@ def dynamic_locate_many(context, selector, by=By.CSS_SELECTOR, scope_getter=LOCA
 
 
 class LocateBase(object):
-    search_scope_getter = LOCAL_SCOPE_GETTER
+    search_scope_getter = staticmethod(LOCAL_SCOPE_GETTER)
 
     def __init__(self, selector, by=By.CSS_SELECTOR, webelement_class=WebElement):
         self.selector = selector
@@ -48,8 +48,8 @@ class LocateMany(LocateBase):
 
 
 class LocateGlobal(Locate):
-    search_scope_getter = GLOBAL_SCOPE_GETTER
+    search_scope_getter = staticmethod(GLOBAL_SCOPE_GETTER)
 
 
 class LocateGlobalMany(LocateMany):
-    search_scope_getter = GLOBAL_SCOPE_GETTER
+    search_scope_getter = staticmethod(GLOBAL_SCOPE_GETTER)
