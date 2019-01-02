@@ -59,7 +59,7 @@ class ManyFoundElementsListWrapper(object):
 
 class DictElementWrapper(ManyFoundElementsListWrapper):
     def __init__(self, context, selector, by, webelement_class, key):
-        super().__init__(context, selector, by, webelement_class)
+        super(DictElementWrapper, self).__init__(context, selector, by, webelement_class)
         self.key = key
 
     def items(self):
@@ -79,5 +79,5 @@ class DictElementWrapper(ManyFoundElementsListWrapper):
 
     @property
     def _elements(self):
-        found_elements = super()._elements
+        found_elements = super(DictElementWrapper, self)._elements
         return {self.key(element): element for element in found_elements}
