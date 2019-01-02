@@ -59,8 +59,8 @@ class TestLocateMany(WebDriverTestCase):
         for key, book in self.page.books_by_titles.items():
             assert key == book.title.field_value.text
 
-    def test_should_return_keys_for_keys_method_while_using_dict_wrapper(self):
-        assert sorted(self.listed_books) == sorted(self.page.books_by_titles.keys())
+    def test_should_return_keys_in_dom_order_for_keys_method_while_using_dict_wrapper(self):
+        assert self.listed_books == list(self.page.books_by_titles.keys())
 
     def test_should_not_allow_to_modify_elements(self):
         with pytest.raises(AttributeError):

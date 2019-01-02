@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 from selenium.webdriver.common.by import By
 
 from gluten.element_wrappers import DictElementWrapper
@@ -17,7 +19,7 @@ class TableWebElement(WebElement):
     @property
     def rows(self):
         columns_keys = [col.text for col in self.columns]
-        return {key: dynamic_locate_many(row, 'td', key=StaticKeys(columns_keys)) for key, row in self._rows.items()}
+        return OrderedDict((key, dynamic_locate_many(row, 'td', key=StaticKeys(columns_keys))) for key, row in self._rows.items())
 
     def __getitem__(self, item):
         return self.rows[item]

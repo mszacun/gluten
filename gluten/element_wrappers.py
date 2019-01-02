@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 
 from gluten.values_wrappers import ValuesList, ValuesDict
@@ -80,4 +82,4 @@ class DictElementWrapper(ManyFoundElementsListWrapper):
     @property
     def _elements(self):
         found_elements = super(DictElementWrapper, self)._elements
-        return {self.key(element): element for element in found_elements}
+        return OrderedDict((self.key(element), element) for element in found_elements)
