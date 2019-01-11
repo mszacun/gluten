@@ -127,3 +127,9 @@ class TestLocateMany(WebDriverTestCase):
         }
         actual_chapters = dict(self.page.first_book.chapters_by_title.values('first_page').values('text').items())
         assert actual_chapters == harry_potter_chapters_start
+
+    def test_should_allow_checking_existance_of_many_located_elements(self):
+        assert not self.page.non_existing_books.exists()
+        assert not self.page.non_existing_books_by_title.exists()
+        assert self.page.books.exists()
+        assert self.page.books_by_titles.exists()

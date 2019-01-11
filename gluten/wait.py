@@ -13,7 +13,10 @@ def do_it(fun, max_reps=5, delay=0.5):
             time.sleep(delay)
 
 
-def wait_until(fun, max_reps=5, delay=0.5):
-    while not fun() and max_reps > 0:
+def wait_until(fun, max_reps=10, delay=1):
+    while not fun():
         max_reps -= 1
-        sleep(delay)
+        time.sleep(delay)
+        if max_reps == 0:
+            raise Exception('Specified conditions was not met')
+

@@ -48,6 +48,12 @@ class ManyFoundElementsListWrapper(object):
     def __iter__(self):
         return iter(self._elements)
 
+    def exists(self):
+        try:
+            return bool(self._elements)
+        except (TimeoutException, NoSuchElementException):
+            return False
+
     @property
     def _elements(self):
         found_elements = self.context.find_elements(self.by, self.selector)
