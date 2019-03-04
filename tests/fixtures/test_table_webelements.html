@@ -3,32 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>Aginoodle BACKLOG tool</title>
+    <style>
+      .my-team {
+        background-color: blue;
+      }
+
+      .current-sprint {
+        background-color: green;
+      }
+
+      .selected {
+        background-color: red;
+      }
+
+      .prioritized {
+        color: pink;
+      }
+    </style>
 </head>
 <body>
 <table>
     <thead>
     <tr>
         <th>Component</th>
-        <td>299</td>
-        <td>300</td>
-        <td>301</td>
-        <td>302</td>
-        <td>303</td>
-        <td>304</td>
-        <td>305</td>
-        <td>306</td>
-        <td>307</td>
-        <td>308</td>
-        <td>309</td>
-        <td>310</td>
-        <td>311</td>
-        <td>312</td>
-        <td>313</td>
+        <th>299</th>
+        <th class="current-sprint">300</th>
+        <th>301</th>
+        <th>302</th>
+        <th>303</th>
+        <th>304</th>
+        <th>305</th>
+        <th>306</th>
+        <th>307</th>
+        <th>308</th>
+        <th>309</th>
+        <th>310</th>
+        <th>311</th>
+        <th>312</th>
+        <th>313</th>
     </tr>
     </thead>
     <tbody>
     <tr>
-        <th>ALIGNMENTS</th>
+        <th class="prioritized">ALIGNMENTS</th>
         <td>FTW4</td>
         <td>FTW2</td>
         <td>FTK2</td>
@@ -68,8 +85,8 @@
         <td>FTK12</td>
         <td>FTK14</td>
         <td>FTK14</td>
-        <td>FTK16</td>
-        <td>FTK16</td>
+        <td class="my-team">FTK16</td>
+        <td class="my-team">FTK16</td>
         <td>FTK1</td>
         <td>FTK1</td>
         <td>FTK2</td>
@@ -89,7 +106,7 @@
         <td>FTW5</td>
         <td>FTW7</td>
         <td>FTU3</td>
-        <td>FTK16</td>
+        <td class="my-team">FTK16</td>
         <td>FTK10</td>
         <td>FTW17</td>
         <td>FTW18</td>
@@ -99,7 +116,7 @@
         <td>FTK20</td>
         <td>FTK13</td>
     </tr>
-    <tr>
+    <tr class="selected">
         <th>TOGGLERS</th>
         <td>FTK1</td>
         <td>FTK14</td>

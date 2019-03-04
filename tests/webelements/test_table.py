@@ -22,7 +22,9 @@ class TestTableWebElement(WebDriverTestCase):
         assert list(self.page.table.rows.keys()) == expected_rows
 
     def test_should_be_able_to_access_columns(self):
-        columns_names = [col.text for col in self.page.table.columns]
         expected_names = ['299', '300', '301', '302', '303', '304', '305', '306',
                           '307', '308', '309', '310', '311', '312', '313']
-        assert columns_names == expected_names
+        assert list(self.page.table.columns_headers.keys()) == expected_names
+
+    def test_should_access_column_header_by_key(self):
+        assert self.page.table.columns_headers['301'].text == '301'
