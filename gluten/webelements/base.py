@@ -5,6 +5,11 @@ from gluten.search_scope import SearchScope
 
 
 class WebElement(webelement.WebElement):
+    @classmethod
+    def from_selenium_webelement(cls, selenium_webelement):
+        selenium_webelement.__class__ = cls
+        return selenium_webelement
+
     def _get_local_search_scope(self):
         return SearchScope(self)
 

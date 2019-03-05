@@ -24,9 +24,7 @@ class FoundElementWrapper(object):
 
     @property
     def _element(self):
-        found_element = self.context.find_element(self.by, self.selector)
-        found_element.__class__ = self.webelement_class
-        return found_element
+        return self.webelement_class.from_selenium_webelement(self.context.find_element(self.by, self.selector))
 
     def __getattr__(self, attr_name):
         return getattr(self._element, attr_name)
@@ -57,9 +55,7 @@ class ManyFoundElementsListWrapper(object):
     @property
     def _elements(self):
         found_elements = self.context.find_elements(self.by, self.selector)
-        for element in found_elements:
-            element.__class__ = self.webelement_class
-        return found_elements
+        return [self.webelement_class.from_selenium_webelement(element) for element in found_elements]
 
     def values(self, attribute_name):
         return ValuesList(self._elements).values(attribute_name)
