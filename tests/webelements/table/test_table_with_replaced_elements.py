@@ -38,5 +38,5 @@ class TestTableWebElement(WebDriverTestCase):
             '992', '003', '103', '203', '303', '403', '503', '603', '703', '803', '903', '013', '113', '213', '313'
         ]
 
-        assert self.page.table_with_reversed_headers.rows_headers.keys() == reversed_rows_headers
-        assert self.page.table_with_reversed_headers.columns_headers.keys() == reversed_columns_headers
+        assert list(self.page.table_with_reversed_headers.rows_headers.keys()) == reversed_rows_headers
+        assert list(self.page.table_with_reversed_headers.columns_headers.keys()) == reversed_columns_headers
