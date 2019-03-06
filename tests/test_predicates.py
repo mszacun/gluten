@@ -1,14 +1,21 @@
 import pytest
 
-from gluten import WebElement, LocateMany, dynamic_locate
-from gluten.predicates import Predicate, HasClassPredicate, HasElementPredicate, Not
+from gluten import WebElement, LocateMany, dynamic_locate, Locate
+from gluten.predicates import Predicate, HasClassPredicate, HasElementPredicate, Not, TextEqualPredicate
 
 from tests.utils import WebDriverTestCase
 from tests.pages.diffrent_locators_page import DiffrentLocatorsPage
 from tests.pages.books_page import BooksPage
 
 
+class AvailibilityWebElementWithPredicate(WebElement):
+    is_available_with_text_equal_predicate = TextEqualPredicate('AVAILABLE')
+
+
 class BookWebElementWithPredicate(WebElement):
+    availability_with_predicate = Locate('.availability', webelement_class=AvailibilityWebElementWithPredicate)
+
+
     is_available_predicate_with_passed_lambda = Predicate(lambda elem: dynamic_locate(elem, '.availability').text == 'AVAILABLE')
     is_new_has_class_predicate = HasClassPredicate('new')
     is_not_available_has_element_predicate = HasElementPredicate('.not-available')
@@ -50,3 +57,11 @@ class TestPredicates(WebDriverTestCase):
         assert self.page.books_with_predicates[1].is_available_with_not_has_element_predicate
         assert not self.page.books_with_predicates[2].is_available_with_not_has_element_predicate
         assert self.page.books_with_predicates[3].is_available_with_not_has_element_predicate
+
+    def test_text_equal_predicate(self):
+        books = self.page.books_with_predicates
+        assert books[0].availability_with_predicate.is_available_with_text_equal_predicate
+        assert books[1].availability_with_predicate.is_available_with_text_equal_predicate
+        assert not books[2].availability_with_predicate.is_available_with_text_equal_predicate
+        assert books[3].availability_with_predicate.is_available_with_text_equal_predicate
+

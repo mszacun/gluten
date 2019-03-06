@@ -27,3 +27,8 @@ class HasClassPredicate(Predicate):
 class HasElementPredicate(Predicate):
     def __init__(self, selector, by=By.CSS_SELECTOR):
         super(HasElementPredicate, self).__init__(lambda webelement: dynamic_locate(webelement, selector, by).exists())
+
+
+class TextEqualPredicate(Predicate):
+    def __init__(self, expected_text):
+        super(TextEqualPredicate, self).__init__(lambda webelement: webelement.text == expected_text)
