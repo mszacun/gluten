@@ -85,3 +85,10 @@ class DictElementWrapper(ManyFoundElementsListWrapper):
     def _elements(self):
         found_elements = super(DictElementWrapper, self)._elements
         return OrderedDict((self.key(element), element) for element in found_elements)
+
+
+# Special Null-object returned from LocateOneOfMany locator, when element matching predicate was not found
+# It has the same exists method as other element wrappers
+class NotFoundOneOfManyElementWrapper(object):
+    def exists(self):
+        return False

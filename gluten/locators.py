@@ -1,7 +1,9 @@
 from selenium.webdriver.common.by import By
 
 from gluten.webelements.base import WebElement
-from gluten.element_wrappers import FoundElementWrapper, ManyFoundElementsListWrapper, DictElementWrapper
+from gluten.element_wrappers import (
+    FoundElementWrapper, ManyFoundElementsListWrapper, DictElementWrapper, NotFoundOneOfManyElementWrapper
+)
 
 
 LOCAL_SCOPE_GETTER = lambda obj: obj._get_local_search_scope()
@@ -45,6 +47,16 @@ class LocateMany(LocateBase):
     def __get__(self, obj, type):
         return dynamic_locate_many(obj, self.selector, self.by, self.__class__.search_scope_getter,
                                    self.webelement_class, self.key)
+
+
+class LocateOneOfMany(LocateMany):
+    def __init__(self, selector, predicate, by=By.CSS_SELECTOR, webelement_class=WebElement):
+        super(LocateOneOfMany, self).__init__(selector, by, webelement_class)
+        self.predicate = predicate
+
+    def __get__(self, obj, type):
+        elements = super(LocateOneOfMany, self).__get__(obj, type)
+        return next((element for element in elements if self.predicate(element)), NotFoundOneOfManyElementWrapper())
 
 
 class LocateGlobal(Locate):
