@@ -77,7 +77,7 @@ class TestLocateMany(WebDriverTestCase):
         assert list(self.page.books[0].chapters.values('text')) == harry_potter_chapters_with_pages
 
     def test_should_allow_chaining_when_getting_elements_attributes(self):
-        expected_availability = ['AVIABLE', 'AVIABLE', 'NOT AVIABLE', 'AVIABLE']
+        expected_availability = ['AVAILABLE', 'AVAILABLE', 'NOT AVAILABLE', 'AVAILABLE']
         assert list(self.page.books.values('availability').values('text')) == expected_availability
 
         actual_books_titles = list(self.page.books.values('title').values('field_value').values('text'))
@@ -93,10 +93,10 @@ class TestLocateMany(WebDriverTestCase):
 
     def test_should_allow_chaining_when_getting_key_indexed_elements_attributes(self):
         expected_books_availability = {
-            self.harry_potter_title: 'AVIABLE',
-            self.lord_of_the_ring_title: 'AVIABLE',
-            self.da_vinci_code_title: 'NOT AVIABLE',
-            self.the_catcher_title: 'AVIABLE',
+            self.harry_potter_title: 'AVAILABLE',
+            self.lord_of_the_ring_title: 'AVAILABLE',
+            self.da_vinci_code_title: 'NOT AVAILABLE',
+            self.the_catcher_title: 'AVAILABLE',
         }
         assert dict(
             self.page.books_by_titles.values('availability').values('text').items()) == expected_books_availability
