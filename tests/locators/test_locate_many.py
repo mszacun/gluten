@@ -48,6 +48,10 @@ class TestLocateMany(WebDriverTestCase):
         for book, book_title in zip(self.page.books, self.listed_books):
             assert book.title.field_value.text == self.page.books_by_titles[book_title].title.field_value.text
 
+    def test_should_let_access_elements_by_given_key_when_key_is_given_as_string_with_name_of_attribiute(self):
+        for book, book_title in zip(self.page.books, self.listed_books):
+            assert book.title.field_value.text == self.page.books_by_titles_with_string_key[book_title].title.field_value.text
+
     def test_should_allow_to_get_number_of_found_items_using_len_operator_while_using_dict_wrapper(self):
         assert len(self.page.books_by_titles) == 4
 

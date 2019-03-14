@@ -42,6 +42,7 @@ class BooksPage(Page):
     first_book = Locate('.book', webelement_class=BookWebElement)
     books = LocateMany('.book', webelement_class=BookWebElement)
     books_by_titles = LocateMany('.book', webelement_class=BookWebElement, key=lambda book: book.title.field_value.text)
+    books_by_titles_with_string_key = LocateMany('.book', webelement_class=BookWebElement, key='title.field_value.text')
     bestseller = Locate('.bestseller', webelement_class=BestsellerWebElement)
     non_existing_books = LocateMany('.non-existing-book')
     non_existing_books_by_title = LocateMany('.non-existing-book', key=lambda book: book.title.field_value.text)

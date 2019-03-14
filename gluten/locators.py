@@ -1,3 +1,5 @@
+from operator import attrgetter
+
 from selenium.webdriver.common.by import By
 
 from gluten.webelements.base import WebElement
@@ -18,6 +20,7 @@ def dynamic_locate_many(context, selector, by=By.CSS_SELECTOR, scope_getter=LOCA
                         webelement_class=WebElement, key=None):
     search_scope = scope_getter(context)
     if key:
+        key = attrgetter(key) if isinstance(key, str) else key
         return DictElementWrapper(search_scope, selector, by, webelement_class, key)
     return ManyFoundElementsListWrapper(search_scope, selector, by, webelement_class)
 
