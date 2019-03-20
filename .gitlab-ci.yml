@@ -1,0 +1,22 @@
+image: node:9-alpine
+
+pages:
+  cache:
+    paths:
+    - docs/node_modules/
+
+  before_script:
+  - yarn config set http-proxy http://plwroag-proxy001.emea.nsn-net.net:8080
+  - yarn config set https-proxy http://plwroag-proxy001.emea.nsn-net.net:8080
+  - cd docs && yarn --frozen-lockfile
+
+  script:
+  - yarn docs:build
+
+  artifacts:
+    paths:
+    - public
+
+  only:
+    - master
+
