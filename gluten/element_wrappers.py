@@ -1,6 +1,8 @@
 from collections import OrderedDict
 
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 from gluten.values_wrappers import ValuesList, ValuesDict
 
@@ -15,9 +17,10 @@ class FoundElementWrapper(object):
     def __getitem__(self, item):
         return self._element[item]
 
-    def exists(self):
+    def exists(self, timeout=2):
+        expected_conditions = EC.presence_of_element_located((self.by, self.selector))
         try:
-            _ = self._element
+            element = WebDriverWait(self.parent, timeout).until(expected_conditions)
             return True
         except (TimeoutException, NoSuchElementException):
             return False
