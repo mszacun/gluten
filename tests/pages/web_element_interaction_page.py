@@ -21,6 +21,7 @@ class WebElementInteractionPage(Page):
     add_class_button = Locate('add-class-button', By.ID)
 
     double_click_text_changing_div = Locate('double-click-text-changing-div', By.ID)
+    hover_text_changing_div = Locate('hover-text-chainging-div', By.ID)
 
     def open(self):
         fixture_url = get_fixture_url('test_web_elements_interaction_fixture.html')

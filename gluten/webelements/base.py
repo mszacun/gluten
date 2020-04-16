@@ -34,6 +34,9 @@ class WebElement(webelement.WebElement):
     def double_click(self):
         ActionChains(self.parent).double_click(self).perform()
 
+    def hover(self):
+        ActionChains(self.parent).move_to_element(self).perform()
+
     def move_to(self):
         self.parent.execute_script("arguments[0].scrollIntoView(true);", self);
 

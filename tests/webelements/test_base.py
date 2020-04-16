@@ -91,3 +91,11 @@ class TestBaseWebelement(WebDriverTestCase):
         assert page.double_click_text_changing_div.text == 'This text will change on double click'
         page.double_click_text_changing_div.double_click()
         assert page.double_click_text_changing_div.text == 'double clicked'
+
+    def test_should_hover_element(self):
+        page = WebElementInteractionPage(driver=self.firefox)
+        page.open()
+
+        assert page.hover_text_changing_div.text == 'This text will change on double click'
+        page.double_click_text_changing_div.hover()
+        assert page.hover_text_changing_div.text == 'hovered'

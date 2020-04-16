@@ -20,6 +20,8 @@
 
         <div id="double-click-text-changing-div">This text will change on double click</div>
 
+        <div id="hover-text-chainging-div">This text will change on hover</div>
+
         <script>
 
             let copyButton = document.querySelector('#copy-text');
@@ -47,6 +49,11 @@
             let doubleClickTextChangingDiv = document.querySelector('#double-click-text-changing-div');
             doubleClickTextChangingDiv.addEventListener('dblclick', event => {
               doubleClickTextChangingDiv.textContent = 'double clicked';
+            });
+
+            let hoverTextChangingDiv = document.querySelector('#hover-text-chainging-div');
+            hoverTextChangingDiv.addEventListener('mouseover', event => {
+              hoverTextChangingDiv.textContent = 'hovered';
             });
 
         </script>
